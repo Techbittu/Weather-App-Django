@@ -9,13 +9,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
     <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/bebreezee-weather-symbols/691/icon-weather-sunsleetlight-512.png" type="image/x-icon">
 </head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      {% if user.is_authenticated %}
+      
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Welcome, {{user.username}}</a>
+      </li>
+
+      {% else %}
+
+      <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li>
+
+      {% endif %}
+    </ul>
+  </div>
+</nav>
 
 <body>
-    <section class="hero is-primary">
+    <section style="background:black;" class="hero is-primary">
         <div class="hero-body">
             <div class="container">
-                <h1 class="title">
-                    What's the weather like?
+                <h1 style="text-align:center" class="title">
+                    Check Weather !
                 </h1>
             </div>
         </div>
@@ -23,16 +49,16 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-offset-4 is-4">
+                <div class="column is-offset-4 is-5">
                     <form method="POST">
                         {% csrf_token %}
                         <div class="field has-addons">
-                            <div class="control is-expanded">
+                            <div class="control ">
                                 {{ form.name }}
                             </div>
-                            <div class="control">
-                                <button type="submit" class="button is-info">
-                                    Add City
+                            <div style="margin-left: 50px;" class="control is-1">
+                                <button type="submit" style="background:black;color:white;" class="button">
+                                    Select City
                                 </button>
                             </div>
                         </div>
@@ -47,8 +73,8 @@
     </section>
     <section class="section">
         <div class="container">
-            <div class="columns">
-                <div class="column is-offset-4 is-4">
+            <div class="rows">
+                <div class="rows is-offset-4 is-4">
                     {% for city_weather in weather_data %}
                     <div class="box">
                         <article class="media">
@@ -80,6 +106,9 @@
         </div>
     </section>
     <footer class="footer">
+        <div style="text-align: center">
+            <h3>@copyright Deepak Kumar Arya</h3>
+        </div>
     </footer>
 </body>
 
